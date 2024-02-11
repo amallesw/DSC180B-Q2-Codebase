@@ -34,4 +34,4 @@ With the environment set up and activated, you can now run a select model by run
 
 ```bash
 cd scripts
-python scripts/run_model_training.py
+python run_model_training.py
