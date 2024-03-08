@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import h5py
 import argparse
+import re
 
 def preprocess_pixels(data: pd.DataFrame, dataset_name: str) -> pd.DataFrame:
     """
@@ -44,6 +45,28 @@ def save_preprocessed_data(images, labels, file_path):
         h5f.create_dataset("labels", data=labels)
         
     print(f"Preprocessing complete. Data saved to: {file_path}")
+    
+def reconstruct_csvs(dataset_name: str, data_path:str) -> None:
+    """
+    Reconstructs FER and Dartmouth csvs based on chunked csvs
+    
+    Parameters:
+    - dataset_name: (str) "fer" or "dartmouth"
+    - data_path: (str) filepath of full dataframe
+    """
+    chunks = []
+    input_folder = f"data/{dataset_name}"
+    
+    filenames = [filename for filename in os.listdir(input_folder) if filename.endswith('.csv') and "chunk" in filename]
+    sorted_filenames = sorted(filenames, key=lambda x: int(re.search(r"chunk_(\d+).csv", x).group(1)))
+
+    for filename in sorted_filenames:
+        chunk = pd.read_csv(f'{input_folder}/{filename}')
+        chunks.append(chunk)
+
+    original_df = pd.concat(chunks, ignore_index=True)
+    original_df.to_csv(data_path, index=False)
+    print(f"Saved reconstructed DataFrame to {data_path}")
 
 def main():
     parser = argparse.ArgumentParser(description="Preprocess dataset images.")
@@ -53,6 +76,9 @@ def main():
 
     data_path = f"data/{args.dataset_name}/{args.dataset_name}48x48.csv"
     hdf5_file_path = f"data/{args.dataset_name}/{args.dataset_name}_preprocessed.h5"
+    
+    # Construct full DataFrame from chunks
+    reconstruct_csvs(args.dataset_name, data_path)
 
     # Load the data
     df = pd.read_csv(data_path)
