@@ -38,8 +38,11 @@ class FeatureExtractor:
         """
         Extracts embeddings from the given dataset and saves them to disk.
         """
+        use_gpu = torch.cuda.is_available()
+        num_workers = 4 if use_gpu else 0
+        
         self.model.eval()
-        loader = DataLoader(dataset, batch_size=self.batch_size, shuffle=False, num_workers=4)
+        loader = DataLoader(dataset, batch_size=self.batch_size, shuffle=False, num_workers=num_workers)
         embeddings, labels = [], []
 
         with torch.no_grad():
