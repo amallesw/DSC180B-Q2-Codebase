@@ -17,13 +17,13 @@ Before you begin, ensure you meet the following requirements:
 To get started, clone the repository and set up a virtual environment:
 
 ```bash
-cd projectname
 python3 -m venv venv_name
 source venv_name/bin/activate
 ```
 Next, install the required dependencies:
 
 ```bash
+cd projectname
 pip install -r requirements.txt
 ```
 
