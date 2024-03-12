@@ -1,37 +1,68 @@
-# Quarter 2 Project: Children Emotion Recognition
+# Project Name
 
-## Overview
-This repository contains the codebase for the Children Emotion Recognition project. The project aims to develop a machine learning model capable of recognizing emotions from children's facial expressions. 
+## Introduction
 
-## Getting Started
+This project is designed to [Briefly describe the core objective of the project, such as solving a specific problem, demonstrating a technology, or providing a useful tool for certain tasks]. By leveraging cutting-edge technologies and methodologies, including [mention any significant technologies, frameworks, or methods used, e.g., machine learning models, data analysis techniques, etc.], this project aims to deliver [mention the key outcomes or benefits of the project].
 
-### Prerequisites
-- Conda (Anaconda or Miniconda)
+## Prerequisites
 
-### Environment Setup
-To run the code, you need to set up a Python environment. The following instructions will guide you through creating and activating a Conda environment for this project.
+Before you begin, ensure you meet the following requirements:
+- Python 3.8 or newer
+- Connecting to a GPU is preferred.
 
-1. **Create the Conda Environment**: Create a new Conda environment named `emotion_recognition` using Python 3.8 (replace `3.8` with the version used during development if different):
+## Installation
 
-    ```bash
-    conda create --name emotion_recognition python=3.8
-    ```
+### Setting Up the Environment
 
-2. **Activate the Environment**: Activate the newly created environment:
-
-    ```bash
-    conda activate emotion_recognition
-    ```
-
-3. **Install Dependencies**: Install the required packages specified in `requirements.txt`:
-
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-### Running the Project
-With the environment set up and activated, you can now run a select model by running the following:
+To get started, clone the repository and set up a virtual environment:
 
 ```bash
-cd scripts
-python run_model_training.py
+cd projectname
+python3 -m venv venv_name
+source venv_name/bin/activate
+```
+Next, install the required dependencies:
+
+```bash
+pip install -r requirements
+```
+
+## Usage
+### Running the Project
+
+To run the project, follow these steps:
+
+1. **Preprocessing:** First, run the preprocessing script to prepare your data.
+```bash
+./run_preprocessing.sh
+```
+
+2. **Execution:** Use the run.py script with the following arguments to train and evaluate the model:
+```bash
+python run.py --model_arch [MODEL_ARCH] --classifier [CLASSIFIER] --training_type [TRAINING_TYPE] --dataset_name [DATASET_NAME] [--augment_data]
+```
+
+- `--model_arch`: Specifies the architecture of the model you wish to use. Options include 'vit', 'resnet', 'efficientnet', and 'none'. The default value is 'none'. Note that for classifiers other than CNN, specifying the model architecture is required.
+- `--classifier`: Required. Specifies the type of classifier to use. Options include 'NN' (Neural Network), 'SVM' (Support Vector Machine), 'RF' (Random Forest), 'CNN' (Convolutional Neural Network).
+- `--training_type`: Specifies whether to use full or partial training for models. Options include 'full', 'partial', and 'none'. The default value is 'none'. This is required for pretrained model classifiers, except when using CNN.
+- `--dataset_name`: Required. Specifies the name of the dataset to use. Options include 'fer' and 'dartmouth'.
+- `--augment_data`: An optional flag that, when set, enables data augmentation for training.
+
+Example Command for CNN Classifier:
+
+To run the project using a CNN classifier on the Dartmouth dataset, you can use the following simplified command since `--model_arch` and `--training_type` are not required for CNN:
+
+```bash
+python run.py --classifier CNN --dataset_name dartmouth
+```
+This command initiates the training and evaluation process for a CNN classifier with the Dartmouth dataset. The script handles data preprocessing, model training, validation, and testing, outputting the results upon completion.
+
+### Explanation of `run.py`
+The `run.py` script orchestrates the model training and evaluation process. It accepts various arguments to customize the execution according to the desired model architecture, classifier, and dataset. Here's a breakdown of its main functionalities:
+
+**Data Preparation:** Based on the specified dataset, the script preprocesses the data, applying any requested augmentations, and splits it into training, validation, and testing sets.
+**Model and Classifier Configuration:** Depending on the arguments, the script configures the chosen model architecture and classifier for the task.
+**Training and Validation:** The model is trained and validated against the prepared datasets, with progress and metrics reported according to the specified number of epochs.
+**Evaluation:** Finally, the model is evaluated on the test set, providing insights into its performance.
+
+
