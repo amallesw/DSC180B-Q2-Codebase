@@ -61,8 +61,11 @@ This command initiates the training and evaluation process for a CNN classifier 
 The `run.py` script orchestrates the model training and evaluation process. It accepts various arguments to customize the execution according to the desired model architecture, classifier, and dataset. Here's a breakdown of its main functionalities:
 
 **Data Preparation:** Based on the specified dataset, the script preprocesses the data, applying any requested augmentations, and splits it into training, validation, and testing sets.
+
 **Model and Classifier Configuration:** Depending on the arguments, the script configures the chosen model architecture and classifier for the task.
+
 **Training and Validation:** The model is trained and validated against the prepared datasets, with progress and metrics reported according to the specified number of epochs.
+
 **Evaluation:** Finally, the model is evaluated on the test set, providing insights into its performance.
 
 
