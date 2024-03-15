@@ -53,7 +53,6 @@ def run(args, config):
     
     print("Training and validating...")
     model.train_and_validate(train_loader, val_loader, num_epochs)
-#     print(f"Best validation accuracy: {best_val_acc:.2f}")
     
     print("Evaluating on test set...")
     test_metrics = model.evaluate_model(test_loader, model.emotion_labels)
