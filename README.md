@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is designed to [Briefly describe the core objective of the project, such as solving a specific problem, demonstrating a technology, or providing a useful tool for certain tasks]. By leveraging cutting-edge technologies and methodologies, including [mention any significant technologies, frameworks, or methods used, e.g., machine learning models, data analysis techniques, etc.], this project aims to deliver [mention the key outcomes or benefits of the project].
+This project develops multiple CV models and implements transfer learning and data augmentations to improve generalization of industry level facial emotion recognition for children's faces. By leveraging cutting-edge technologies and methodologies, including OpenCV, this project aim to deliver improved emotion recognition models to better diagnosis psychological issues in children
 
 ## Prerequisites
 
